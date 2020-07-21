@@ -17,7 +17,58 @@ namespace C_sharp_DZ_6_2
 
 
 
-    class Program
+
+    public class round1
+    {
+        public void DrawRound()
+        {
+            for (int i = 0; i < r; i++)
+            {
+                x = (int)Math.Round(Math.Sqrt((Math.Pow(r, 2) - Math.Pow(y, 2))));
+                Console.SetCursorPosition(x + r, y + r);
+                Console.WriteLine('*');
+                Console.SetCursorPosition(x + r, -y + r);
+                Console.WriteLine('*');
+                Console.SetCursorPosition(-x + r, -y + r);
+                Console.WriteLine('*');
+                Console.SetCursorPosition(-x + r, y + r);
+                Console.WriteLine('*');
+            }
+        }
+
+    }
+
+
+
+    public class rhombus
+    {
+        public void DrawRhombus()
+        {
+
+            for (int i = 0; i < size; i++)
+            {
+                Console.SetCursorPosition(x, y + i);
+                Console.WriteLine("*");
+
+                Console.SetCursorPosition(x + size, y + size);
+                Console.WriteLine("*");
+                Console.SetCursorPosition(x + i, y + i);
+                Console.WriteLine("*");
+                Console.SetCursorPosition(x - i, y - i);
+                Console.WriteLine("*");
+
+
+            }
+        }
+    }
+
+
+}
+
+
+
+
+class Program
     {
         static void Main(string[] args)
         {
