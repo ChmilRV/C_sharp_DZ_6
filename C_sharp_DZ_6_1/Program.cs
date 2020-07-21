@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 namespace C_sharp_DZ_6_1
 {
     public abstract class Figure        //Фигура
-
     {
         public abstract double Area();
         public abstract double Perimeter();
@@ -29,13 +28,13 @@ namespace C_sharp_DZ_6_1
             Console.WriteLine($"Площадь: {Area():F2}");
         }
     }
-
     class Triangle : Figure     //Треугольник________________________________________________________________________
     {
         double side1;
         double side2;
         double side3;
-        public string FigureName { get; set; }
+        static readonly string figureName;
+        static Triangle() { figureName = "Треугольник"; }
         public double Side1
         {
             get { return side1; }
@@ -80,17 +79,17 @@ namespace C_sharp_DZ_6_1
                 if (value == 0)
                 {
                     Console.WriteLine("Невозможно создать треугольник с нулевой стороной.\nПримем длину третьей стороны равной 1.");
-                    value = 1;
+                    side3 = 1;
                 }
                 else if (value < 0)
                 {
                     Console.WriteLine("Невозможно создать треугольник с отрицательной стороной.\nПримем длину третьей стороны равной модулю введенного числа.");
-                    value = Math.Abs(value);
+                    side3 = Math.Abs(value);
                 }
-                else if (value >= Side1 + Side2)
+                else if (value >= side1 + side2)
                 {
                     Console.WriteLine("Нарушено правило существования треугольника.\nСумма длин двух его сторон больше длины третьей стороны.");
-                    side3 = Side1 + Side2 - 1;
+                    side3 = side1 + side2 - 1;
                     Console.WriteLine($"Примем третью сторону равной {side3}.");
                 }
                 else side3 = value;
@@ -98,28 +97,29 @@ namespace C_sharp_DZ_6_1
         }
         public override double Area()
         {
-            double p = (Side1 + Side2 + Side3) / 2;
-            return Math.Sqrt(p * (p - Side1) * (p - Side2) * (p - Side3));
+            double p = (side1 + side2 + side3) / 2;
+            return Math.Sqrt(p * (p - side1) * (p - side2) * (p - side3));
         }
         public override double Perimeter()
         {
-            return Side1 + Side2 + Side3; 
+            return side1 + side2 + side3; 
         }
 
         public override void Print()
         {
             base.Print();
-            Console.WriteLine(FigureName);
-            Console.WriteLine($"Первая сторона: {Side1}");
-            Console.WriteLine($"Вторая сторона: {Side2}");
-            Console.WriteLine($"Третья сторона: {Side3}");
+            Console.WriteLine(figureName);
+            Console.WriteLine($"Первая сторона: {side1}");
+            Console.WriteLine($"Вторая сторона: {side2}");
+            Console.WriteLine($"Третья сторона: {side3}");
             PrintAreaPerim();
         }
     }
     class Square : Figure       //Квадрат_______________________________________________________________________
     {
         double side;
-        public string FigureName { get; set; }
+        static readonly string figureName;
+        static Square() { figureName = "Квадрат"; }
         public double Side
         {
             get { return side; }
@@ -149,7 +149,7 @@ namespace C_sharp_DZ_6_1
         public override void Print()
         {
             base.Print();
-            Console.WriteLine(FigureName);
+            Console.WriteLine(figureName);
             Console.WriteLine($"Сторона: {Side}");
             PrintAreaPerim();
         }
@@ -158,7 +158,8 @@ namespace C_sharp_DZ_6_1
     {
         private double side1;
         private double side2;
-        public string FigureName { get; set; }
+        static readonly string figureName;
+        static Rectangle() { figureName = "Прямоугольник"; }
         public double Side1
         {
             get { return side1; }
@@ -206,7 +207,7 @@ namespace C_sharp_DZ_6_1
         public override void Print()
         {
             base.Print();
-            Console.WriteLine(FigureName);
+            Console.WriteLine(figureName);
             Console.WriteLine($"Первая сторона: {Side1}");
             Console.WriteLine($"Вторая сторона: {Side2}");
             PrintAreaPerim();
@@ -216,7 +217,8 @@ namespace C_sharp_DZ_6_1
     {
         private double side;
         private double angle;
-        public string FigureName { get; set; }
+        static readonly string figureName;
+        static Rhombus() { figureName = "Ромб"; }
         public double Side
         {
             get { return side; }
@@ -263,7 +265,7 @@ namespace C_sharp_DZ_6_1
         public override void Print()
         {
             base.Print();
-            Console.WriteLine(FigureName);
+            Console.WriteLine(figureName);
             Console.WriteLine($"Сторона: {Side}");
             Console.WriteLine($"Угол между сторонами: {Angle}");
             PrintAreaPerim();
@@ -274,7 +276,8 @@ namespace C_sharp_DZ_6_1
         private double side1;
         private double side2;
         private double angle;
-        public string FigureName { get; set; }
+        static readonly string figureName;
+        static Parallelogram() { figureName = "Параллелограмм"; }
         public double Side1
         {
             get { return side1; }
@@ -339,7 +342,7 @@ namespace C_sharp_DZ_6_1
         public override void Print()
         {
             base.Print();
-            Console.WriteLine(FigureName);
+            Console.WriteLine(figureName);
             Console.WriteLine($"Первая сторона: {Side1}");
             Console.WriteLine($"Вторая сторона: {Side2}");
             Console.WriteLine($"Угол между сторонами: {Angle}");
@@ -352,7 +355,8 @@ namespace C_sharp_DZ_6_1
         double b;
         double c;
         double d;
-        public string FigureName { get; set; }
+        static readonly string figureName;
+        static Trapezoid() { figureName = "Трапеция"; }
         public double A
         {
             get { return a; }
@@ -436,7 +440,7 @@ namespace C_sharp_DZ_6_1
         public override void Print()
         {
             base.Print();
-            Console.WriteLine(FigureName);
+            Console.WriteLine(figureName);
             Console.WriteLine($"Верхнее основание: {A}");
             Console.WriteLine($"Нижнее основание: {B}");
             Console.WriteLine($"Боковая сторона: {C}");
@@ -447,7 +451,8 @@ namespace C_sharp_DZ_6_1
     class Circle : Figure     //Круг_______________________________________________________________________
     {
         double d;
-        public string FigureName { get; set; }
+        static readonly string figureName;
+        static Circle() { figureName = "Круг"; }
         public double D
         {
             get { return d; }
@@ -477,7 +482,7 @@ namespace C_sharp_DZ_6_1
         public override void Print()
         {
             base.Print();
-            Console.WriteLine(FigureName);
+            Console.WriteLine(figureName);
             Console.WriteLine($"Диаметр: {D}");
             PrintAreaPerim();
         }
@@ -486,7 +491,8 @@ namespace C_sharp_DZ_6_1
     {
         double a;
         double b;
-        public string FigureName { get; set; }
+        static readonly string figureName;
+        static Ellipse() { figureName = "Эллипс"; }
         public double A
         {
             get { return a; }
@@ -534,12 +540,38 @@ namespace C_sharp_DZ_6_1
         public override void Print()
         {
             base.Print();
-            Console.WriteLine(FigureName);
+            Console.WriteLine(figureName);
             Console.WriteLine($"Большая полуось: {A}");
             Console.WriteLine($"Малая полуось: {B}");
             PrintAreaPerim();
         }
     }
+
+    /*1 Разработать абстрактный класс Геометрическая Фигура с полями ПлощадьФигуры и ПериметрФигуры.
+    Разработать классы-наследники: Треугольник, Квадрат, Ромб, Прямоугольник, Параллелограмм, Трапеция, Круг, Эллипс и
+    реализовать свойства, которые однозначно определяют объекты данных классов.
+    Реализовать интерфейс ПростойНУгольник, который имеет свойства: Высота, Основание,
+    УголМеждуОснованиемИСмежнойСтороной, КоличествоСторон, Длины Сторон, Площадь, Периметр.
+    Реализовать класс СоставнаяФигура который может состоять из любого количества ПростыхНУгольников
+    Для данного класса определить метод нахождения площади фигуры.
+    Предусмотреть варианты невозможности задания фигуры (введены отрицательные длины сторон или при
+    создании объекта треугольника существует пара сторон, сумма длин которых меньше длины третьей стороны и т п ).*/
+
+    public interface ISimplePolygon
+    {
+        double Height { get; set; }
+        double Base { get; }
+        double Angle { get; }
+        double SidesCount { get; }
+        double SidesLength { get; }
+        double S { get; }
+        double P { get; }
+    }
+
+
+
+
+
 
 
 
@@ -569,33 +601,36 @@ namespace C_sharp_DZ_6_1
         {
             Triangle Triangle_1 = new Triangle
             {
-                Side1 = 10,
+                Side1 = 0,
                 Side2 = 11,
-                Side3 = 12,
-                FigureName = "Треугольник"
+                Side3 = 12
             };
             Triangle_1.Print();
             
             Square Square_1 = new Square
             {
-                Side = 20,
-                FigureName = "Квадрат"
+                Side = 20
             };
             Square_1.Print();
+
+            Square Square_2 = new Square 
+            {
+                Side=10 
+            };
+            Square_2.Print();
+            
             
             Rectangle Rectangle_1 = new Rectangle
             {
                 Side1 = 12,
-                Side2 = 25,
-                FigureName = "Прямоугольник"
+                Side2 = 25
             };
             Rectangle_1.Print();
             
             Rhombus Rhombus_1 = new Rhombus
             {
                 Side = 4,
-                Angle = 30,
-                FigureName = "Ромб"
+                Angle = 30
             };
             Rhombus_1.Print();
             
@@ -603,8 +638,7 @@ namespace C_sharp_DZ_6_1
             {
                 Side1 = 10,
                 Side2 = 12,
-                Angle = 30,
-                FigureName = "Параллелограмм"
+                Angle = 30
             };
             Parallelogram_1.Print();
             
@@ -613,29 +647,25 @@ namespace C_sharp_DZ_6_1
                 A = 10,
                 B = 12,
                 C = 3,
-                D = 4,
-                FigureName = "Трапеция"
+                D = 4
             };
             Trapezoid_1.Print();
-            Trapezoid_1.PrintAreaPerim();
+            
 
             Circle Circle_1 = new Circle
             {
-                D = 7,
-                FigureName = "Круг"
+                D = 7
             };
             Circle_1.Print();
-            Circle_1.PrintAreaPerim();
+            
 
             Figure Ellipse_1 = new Ellipse
             {
                 A=12,
-                B=10,
-                FigureName= "Эллипс"
+                B=10
             };
             Ellipse_1.Print();
-            //Ellipse_1.PrintAreaPerim();
- 
+            
             //Figure[] Figures = {
             //    new Triangle(10, 11, 13),
             //    new Square(10),
