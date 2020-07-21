@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C_sharp_DZ_6_1", "C_sharp_D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C_sharp_DZ_6_2", "C_sharp_DZ_6_2\C_sharp_DZ_6_2.csproj", "{C7550820-2AA2-478B-8B7C-36B69EEE18E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C_sharp_DZ_6_test", "C_sharp_DZ_6_test\C_sharp_DZ_6_test.csproj", "{55B53C4D-5370-4C6E-820E-8ADBD094D515}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C7550820-2AA2-478B-8B7C-36B69EEE18E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7550820-2AA2-478B-8B7C-36B69EEE18E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7550820-2AA2-478B-8B7C-36B69EEE18E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55B53C4D-5370-4C6E-820E-8ADBD094D515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55B53C4D-5370-4C6E-820E-8ADBD094D515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55B53C4D-5370-4C6E-820E-8ADBD094D515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55B53C4D-5370-4C6E-820E-8ADBD094D515}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
