@@ -572,6 +572,7 @@ namespace C_sharp_DZ_6_1
     {
         static void Main(string[] args)
         {
+            Console.Title = "Домашнее задание №6.1. Фигуры.";
             Triangle Triangle_1 = new Triangle
             {
                 Side1 = 10,

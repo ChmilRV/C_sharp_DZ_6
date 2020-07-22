@@ -31,7 +31,7 @@ namespace C_sharp_DZ_6_2
         public abstract void DrawFirure();
 
     }
-    public class Rectangle : Figure        //Прямоугольник_______________________________________________________________________
+    public class Rectangle : Figure        //Прямоугольник____________________________________________________
     {
         public Rectangle(int x, int y, int width, int heigth, ConsoleColor color)
             :base (x, y, width, heigth, color) { }
@@ -39,14 +39,15 @@ namespace C_sharp_DZ_6_2
         public override void DrawFirure()
         {
             Console.ForegroundColor = color;
-            for (int i=x; i < x + width; i++)
+            for (int i=0; i < width; i++)
             {
-                for (int j = y; j < y+heigth; j++)
+                for (int j = 0; j < heigth; j++)
                 {
-                    Console.SetCursorPosition(i,j);
+                    Console.SetCursorPosition(i + x, j + y);
                     Console.Write("*");
-                }   
+                }
             }
+            Console.WriteLine();
             Console.ResetColor();
         }
     }
@@ -58,97 +59,93 @@ namespace C_sharp_DZ_6_2
         public override void DrawFirure()
         {
             Console.ForegroundColor = color;
-            for (int i = x; i < x + width; i++)
+            for (int i = 0; i < width; i++)
             {
-                for (int j = y; j < y + heigth; j++)
+                for (int j = 0; j < heigth; j++)
                 {
-                    Console.SetCursorPosition(i+j, j);
+                    Console.SetCursorPosition(i + j + x, j + y);
                     Console.Write("*");
                 }
-                Console.WriteLine();
             }
+            Console.WriteLine();
             Console.ResetColor();
         }
     }
-    class Triangle : Figure             //Треугольник________________________________________________________________________
+    class Triangle : Figure             //Треугольник____________________________________________________________
     {
         public Triangle(int x, int y, int width, int heigth, ConsoleColor color)
             : base(x, y, width, heigth, color) { }
         public override void DrawFirure()
         {
             Console.ForegroundColor = color;
-            for (int i = x; i < x + width; i++)
+            for (int i = 0; i < width; i++)
             {
-                for (int j = y; j < y + heigth; j++)
+                for (int j = 0; j < width /*heigth*/; j++)
                 {
-                    Console.SetCursorPosition(i, j);
-                    Console.Write("*");
+                    if (i <= j)
+                    {
+                        Console.SetCursorPosition(i + x, j + y);
+                        Console.Write("*");
+                    }
                 }
             }
+            Console.WriteLine();
             Console.ResetColor();
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public class CompositeFigure        //Составная фигура_______________________________________________________________________
+    class Trapezoid : Figure     //Трапеция____________________________________________________________________
+    {
+        public Trapezoid(int x, int y, int width, int heigth, ConsoleColor color)
+            : base(x, y, width, heigth, color) { }
+        public override void DrawFirure()
+        {
+            Console.ForegroundColor = color;
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < heigth; j++)
+                {
+                    if ((i + j + 2 > heigth ) && (i - j - 1 < width - heigth))
+                    {
+                        Console.SetCursorPosition(i + x, j + y);
+                        Console.Write("*");
+                    }
+                }
+            }
+            Console.WriteLine();
+            Console.ResetColor();
+        }
+    }
+    public class CompositeFigure: IComposite       //Составная фигура_____________________________________________
     {
         public void DrawAll(Figure[] composite)
         {
             foreach (Figure item in composite)
             {
-                //Figure.DrawFigure();
-
-
-
+                item.DrawFirure();
             }
         }
     }
-
-
-
-
-
+    public interface IComposite
+    {
+        void DrawAll(Figure[] composite);
+    }
     class Program
     {
         static void Main(string[] args)
         {
-            Console.Title = "Домашнее задание №6.2. Фигуры.";
-
-            //Figure Rectangle_1 = new Rectangle(2, 5, 10, 5, ConsoleColor.Green);
-            //Rectangle_1.DrawFirure();
-
-            //Figure Rhombus_1 = new Rhombus(10, 10, 5, 5, ConsoleColor.Red);
-            //Rhombus_1.DrawFirure();
-
-            Figure Triangle_1 = new Triangle(5, 5, 10, 10, ConsoleColor.Blue);
-            Triangle_1.DrawFirure();
-
-
-            //Figure[] Figures = {
-            //    new Rectangle(2,2,5,7,ConsoleColor.Green),
-            //    new Rectangle(10,10,10,15,ConsoleColor.Yellow)
-
-            //};
-            //CompositeFigure MyFigures = new CompositeFigure();
-
-            //CompositeFigure.DrawAll(Figures);
-
-
-
-
-
+            Console.Title = "Домашнее задание №6.2. Фигуры снова.";
+            Figure Rectangle_1 = new Rectangle(5, 5, 8, 3, ConsoleColor.Green);
+            Figure Rhombus_1 = new Rhombus(10, 10, 8, 8, ConsoleColor.Red);
+            Figure Triangle_1 = new Triangle(10, 15, 6, 12, ConsoleColor.Blue);
+            Figure Trapezoi_1 = new Trapezoid(20, 5, 20, 5, ConsoleColor.DarkYellow);
+            Figure[] Figures = {
+                Rectangle_1,
+                Rhombus_1,
+                Triangle_1,
+                Trapezoi_1
+            };
+            CompositeFigure MyFigures = new CompositeFigure();
+            MyFigures.DrawAll(Figures);
             Console.ReadKey();
         }
     }
